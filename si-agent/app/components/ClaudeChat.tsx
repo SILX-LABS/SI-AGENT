@@ -98,58 +98,60 @@ export default function ClaudeChat() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-gray-950">
+    <div className="flex flex-col h-full bg-gray-50 dark:bg-gray-950">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2">
-            <Sparkles className="h-5 w-5 text-orange-500" />
-            <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              SI-AGENT
-            </h1>
-          </div>
-          
+      <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div className="flex items-center space-x-3">
+          <Sparkles className="h-6 w-6 text-orange-500" />
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+            SI-AGENT
+          </h1>
         </div>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="h-8 w-8">
           <MoreHorizontal className="h-5 w-5" />
         </Button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-white dark:bg-gray-950">
         {messages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-center px-4">
-            <div className="mb-8">
-              <Sparkles className="h-8 w-8 text-orange-500 mx-auto mb-4" />
-              <h2 className="text-2xl font-normal text-gray-900 dark:text-gray-100 mb-4">
+          <div className="flex flex-col items-center justify-center h-full text-center px-6 py-12">
+            <div className="mb-12">
+              <Sparkles className="h-10 w-10 text-orange-500 mx-auto mb-6" />
+              <h2 className="text-3xl font-light text-gray-900 dark:text-gray-100 mb-6">
                 Good afternoon, Gomaa
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
+              <p className="text-gray-600 dark:text-gray-400 text-xl mb-12">
                 How can I help you today?
               </p>
               
               {/* Action buttons like Claude */}
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
-                <button className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                  ✏️ Write
+              <div className="flex flex-wrap justify-center gap-3 max-w-2xl">
+                <button className="px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center space-x-2">
+                  <span>✏️</span>
+                  <span>Write</span>
                 </button>
-                <button className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                  🎓 Learn
+                <button className="px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center space-x-2">
+                  <span>🎓</span>
+                  <span>Learn</span>
                 </button>
-                <button className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                  💻 Code
+                <button className="px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center space-x-2">
+                  <span>💻</span>
+                  <span>Code</span>
                 </button>
-                <button className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                  ☕ Life stuff
+                <button className="px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center space-x-2">
+                  <span>☕</span>
+                  <span>Life stuff</span>
                 </button>
-                <button className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                  📍 Claude's choice
+                <button className="px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center space-x-2">
+                  <span>📍</span>
+                  <span>Claude's choice</span>
                 </button>
               </div>
             </div>
           </div>
         ) : (
-          <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+          <div className="max-w-3xl mx-auto px-6 py-8 space-y-8">
             {messages.map((message) => (
               <div key={message.id} className="flex space-x-3">
                 <div className="flex-shrink-0">
@@ -182,22 +184,22 @@ export default function ClaudeChat() {
         )}
         
         {isLoading && (
-          <div className="max-w-3xl mx-auto px-4 py-6">
-            <div className="flex space-x-3">
+          <div className="max-w-3xl mx-auto px-6 py-8">
+            <div className="flex space-x-4">
               <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                 <Bot className="h-4 w-4 text-white" />
               </div>
               <div className="flex-1">
-                <div className="flex items-center space-x-2 mb-1">
+                <div className="flex items-center space-x-2 mb-2">
                   <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     SI-AGENT
                   </span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <div className="animate-pulse flex space-x-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="flex items-center space-x-3">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   </div>
                   <span className="text-sm text-gray-500">Thinking...</span>
                 </div>
@@ -216,45 +218,49 @@ export default function ClaudeChat() {
         </div>
       )}
 
-      {/* Input Area */}
-      <div className="border-t border-gray-200 dark:border-gray-800 p-4">
-        <div className="max-w-3xl mx-auto">
+      {/* Input Area - Fixed at bottom */}
+      <div className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-4">
+        <div className="max-w-2xl mx-auto">
           <form onSubmit={handleSubmit} className="relative">
-            <div className="flex items-end space-x-2">
-              <div className="flex-1 relative">
-                <Textarea
-                  ref={textareaRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="How can I help you today?"
-                  className="min-h-[44px] max-h-32 resize-none pr-12 text-sm border-gray-300 dark:border-gray-600 rounded-lg"
+            <div className="relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-3xl shadow-sm focus-within:ring-2 focus-within:ring-orange-500 focus-within:border-orange-500 transition-all">
+              <Textarea
+                ref={textareaRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="How can I help you today?"
+                className="w-full min-h-[80px] max-h-48 resize-none border-0 bg-transparent px-6 py-5 pr-20 text-base placeholder:text-gray-500 focus:outline-none focus:ring-0"
+                disabled={isLoading}
+              />
+              
+              {/* Input Controls */}
+              <div className="absolute bottom-4 right-4 flex items-center space-x-2">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
                   disabled={isLoading}
-                />
-                <div className="absolute right-2 bottom-2 flex items-center space-x-1">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="h-6 w-6"
-                    disabled={isLoading}
-                  >
-                    <Paperclip className="h-4 w-4" />
-                  </Button>
-                </div>
+                >
+                  <Paperclip className="h-4 w-4" />
+                </Button>
+                
+                <Button
+                  type="submit"
+                  disabled={!input.trim() || isLoading}
+                  size="icon"
+                  className="h-9 w-9 bg-orange-500 hover:bg-orange-600 text-white rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
               </div>
-              <Button
-                type="submit"
-                disabled={!input.trim() || isLoading}
-                className="h-10 w-10 p-0 bg-orange-500 hover:bg-orange-600"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
             </div>
           </form>
           
-          <div className="flex items-center justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+          {/* Footer Info */}
+          <div className="flex items-center justify-center mt-3 text-xs text-gray-500 dark:text-gray-400">
             <span>DeepSeek v3.1</span>
+            <span className="mx-2">•</span>
             <span>Press Enter to send, Shift+Enter for new line</span>
           </div>
         </div>

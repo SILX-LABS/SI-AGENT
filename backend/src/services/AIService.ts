@@ -50,7 +50,7 @@ export class AIService {
 
   constructor() {
     this.apiKey = process.env.OPENROUTER_API_KEY || '';
-    this.model = process.env.OPENROUTER_MODEL || 'openai/gpt-3.5-turbo';
+    this.model = process.env.OPENROUTER_MODEL || 'deepseek/deepseek-chat-v3.1:free';
     this.baseUrl = process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1';
 
     if (!this.apiKey) {
