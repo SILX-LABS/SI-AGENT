@@ -1,0 +1,57 @@
+{
+  "name": "si-agent-backend",
+  "version": "1.0.0",
+  "description": "SI-AGENT Backend - AI Text-to-API Generation System",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "nodemon -r tsconfig-paths/register src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "db:migrate": "npx prisma migrate dev",
+    "db:generate": "npx prisma generate",
+    "db:seed": "ts-node src/database/seeders/index.ts"
+  },
+  "dependencies": {
+    "@clerk/clerk-sdk-node": "^4.13.14",
+    "@clerk/express": "^0.0.4",
+    "@prisma/client": "^5.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "prisma": "^5.6.0",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.8",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.9.0",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2"
+  },
+  "keywords": [
+    "ai",
+    "api-generation",
+    "text-to-api",
+    "automation",
+    "backend"
+  ],
+  "author": "SI-AGENT Team",
+  "license": "MIT"
+}

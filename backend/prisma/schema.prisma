@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model - synced with Clerk
+model User {
+  id          String   @id @default(cuid())
+  clerkId     String   @unique // Clerk user ID
+  email       String   @unique
+  firstName   String?
+  lastName    String?
+  imageUrl    String?
+  role        String   @default("user") // user, admin, etc.
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lastLoginAt DateTime?
+  
+  // Relations
+  generatedApis GeneratedApi[]
+  apiExecutions ApiExecution[]
+  
+  @@map("users")
+}
+
+// Generated API model - stores AI-generated API metadata
+model GeneratedApi {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  prompt      String   // Original natural language prompt
+  
+  // API Structure
+  endpoint    String   // e.g., "/api/users"
+  method      String   // GET, POST, PUT, DELETE
+  schema      Json     // Input/Output schema
+  code        String   // Generated controller/service code
+  
+  // Status
+  status      ApiStatus @default(DRAFT)
+  isDeployed  Boolean   @default(false)
+  deployedUrl String?
+  
+  // Metadata
+  tags        String[]
+  category    String?
+  version     String   @default("1.0.0")
+  
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  executions  ApiExecution[]
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deployedAt  DateTime?
+  
+  @@map("generated_apis")
+}
+
+// API execution logs
+model ApiExecution {
+  id          String   @id @default(cuid())
+  
+  // Request details
+  method      String
+  endpoint    String
+  requestBody Json?
+  headers     Json?
+  queryParams Json?
+  
+  // Response details
+  statusCode  Int
+  responseBody Json?
+  responseTime Int      // in milliseconds
+  
+  // Error details
+  error       String?
+  stackTrace  String?
+  
+  // Relations
+  apiId       String
+  api         GeneratedApi @relation(fields: [apiId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  executedAt  DateTime @default(now())
+  
+  @@map("api_executions")
+}
+
+// API Templates for common patterns
+model ApiTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  category    String
+  
+  // Template structure
+  schema      Json     // Template schema
+  codeTemplate String  // Code template with placeholders
+  
+  // Usage stats
+  usageCount  Int      @default(0)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("api_templates")
+}
+
+// Enums
+enum ApiStatus {
+  DRAFT
+  TESTING
+  DEPLOYED
+  ARCHIVED
+  ERROR
+}
+
+// Indexes for better performance
+// Add indexes for frequently queried fields
+// @@index([userId])
+// @@index([status])
+// @@index([createdAt])
